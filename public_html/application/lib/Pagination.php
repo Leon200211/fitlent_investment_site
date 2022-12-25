@@ -3,7 +3,7 @@
 namespace application\lib;
 
 class Pagination {
-
+    
     private $max = 10;
     private $route;
     private $index = '';
@@ -18,7 +18,7 @@ class Pagination {
         $this->amount = $this->amount();
         $this->setCurrentPage();
     }
-
+   
     public function get() {
         $links = null;
         $limits = $this->limits();

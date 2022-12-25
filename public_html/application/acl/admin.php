@@ -2,7 +2,7 @@
 
 return [
 	'all' => [
-		'index',
+		'login',
 	],
 	'authorize' => [
 		//
@@ -11,6 +11,9 @@ return [
 		//
 	],
 	'admin' => [
-		//
+		'withdraw',
+		'tariffs',
+		'history',
+		'logout',
 	],
 ];

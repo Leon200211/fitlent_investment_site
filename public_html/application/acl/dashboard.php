@@ -2,10 +2,13 @@
 
 return [
 	'all' => [
-		'index',
+		//
 	],
 	'authorize' => [
-		//
+		'tariffs',
+		'invest',
+		'history',
+		'referrals',
 	],
 	'guest' => [
 		//
