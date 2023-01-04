@@ -78,6 +78,7 @@ class AccountController extends Controller {
 		$this->view->render('Профиль');
 	}
 
+	// метод разлогирования
 	public function logoutAction() {
 		unset($_SESSION['account']);
 		$this->view->redirect('account/login');
@@ -102,6 +103,7 @@ class AccountController extends Controller {
 		$this->view->render('Восстановление пароля');
 	}
 
+	// сброс пароля
 	public function resetAction() {
 		if (!$this->model->checkTokenExists($this->route['token'])) {
 			$this->view->redirect('account/login');

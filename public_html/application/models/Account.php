@@ -149,6 +149,7 @@ class Account extends Model {
 		return true;
 	}
 
+	// проверка на подтвержденный аккаунт
 	public function checkStatus($type, $data) {
 		$params = [
 			$type => $data,
@@ -161,6 +162,7 @@ class Account extends Model {
 		return true;
 	}
 
+	// вход в аккаунт
 	public function login($login) {
 		$params = [
 			'login' => $login,
@@ -168,6 +170,7 @@ class Account extends Model {
 		$data = $this->db->row('SELECT * FROM accounts WHERE login = :login', $params);
 		$_SESSION['account'] = $data[0];
 	}
+
 
 	public function recovery($post) {
 		$token = $this->createToken();
@@ -179,6 +182,7 @@ class Account extends Model {
 		mail($post['email'], 'Recovery', 'Confirm: '.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/account/reset/'.$token);
 	}
 
+
 	public function reset($token) {
 		$new_password = $this->createToken();
 		$params = [
@@ -189,6 +193,7 @@ class Account extends Model {
 		return $new_password;
 	}
 
+	// обновление данных аккаунта
 	public function save($post) {
 		$params = [
 			'id' => $_SESSION['account']['id'],
@@ -207,5 +212,6 @@ class Account extends Model {
 		}
 		$this->db->query('UPDATE accounts SET email = :email, wallet = :wallet'.$sql.' WHERE id = :id', $params);
 	}
+
 
 }

@@ -4,6 +4,9 @@ namespace application\controllers;
 
 use application\core\Controller;
 
+
+
+// контроллер для работы с perfectMoney
 class MerchantController extends Controller {
 
 	public function perfectmoneyAction() {

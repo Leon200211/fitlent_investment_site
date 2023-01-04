@@ -5,6 +5,9 @@ namespace application\controllers;
 use application\core\Controller;
 use application\lib\Pagination;
 
+
+
+// контроллер для работы с инвестициями
 class DashboardController extends Controller {
 
 	public function investAction() {

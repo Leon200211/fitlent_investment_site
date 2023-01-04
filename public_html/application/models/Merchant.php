@@ -4,6 +4,8 @@ namespace application\models;
 
 use application\core\Model;
 
+
+// модель для работы с perfectMoney
 class Merchant extends Model {
 	
 	public function validatePerfectMoney($post, $tariff) {
