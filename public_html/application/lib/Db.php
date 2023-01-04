@@ -4,6 +4,8 @@ namespace application\lib;
 
 use PDO;
 
+
+// класс для работы с Базой Данных
 class Db {
 
 	protected $db;
@@ -25,6 +27,7 @@ class Db {
 				$stmt->bindValue(':'.$key, $val, $type);
 			}
 		}
+
 		$stmt->execute();
 		return $stmt;
 	}

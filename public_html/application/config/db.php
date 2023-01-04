@@ -1,8 +1,9 @@
 <?php
 
+// данные для подключение к БД
 return [
 	'host' => '127.0.0.1:3307',
-	'name' => 'yandex',
+	'name' => 'fitlent_invest',
 	'user' => 'root',
 	'password' => 'root',
 ];

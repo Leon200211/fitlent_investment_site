@@ -4,6 +4,9 @@ namespace application\controllers;
 
 use application\core\Controller;
 
+
+
+// контроллер для работы с аккаунтом
 class AccountController extends Controller {
 
 	// Регистрация

@@ -4,12 +4,15 @@ namespace application\core;
 
 use application\core\View;
 
+
+// Базовый контроллер
 abstract class Controller {
 
 	public $route;
 	public $view;
 	public $acl;
 	public $tariffs;
+	public $model;
 
 	public function __construct($route) {
 		$this->route = $route;

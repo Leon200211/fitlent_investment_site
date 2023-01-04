@@ -4,6 +4,8 @@ namespace application\models;
 
 use application\core\Model;
 
+
+// Модель для работы с аккаунтом
 class Account extends Model {
 
     // проверка на валидацию данных
@@ -54,7 +56,7 @@ class Account extends Model {
 	}
 
 
-
+    // проверка на существование такой почты
 	public function checkEmailExists($email) {
 		$params = [
 			'email' => $email,
@@ -63,10 +65,7 @@ class Account extends Model {
 	}
 
 
-
-
-
-
+    // проверка на существование такого логина
 	public function checkLoginExists($login) {
 		$params = [
 			'login' => $login,
@@ -78,6 +77,7 @@ class Account extends Model {
 		return true;
 	}
 
+	// проверка на существования токена
 	public function checkTokenExists($token) {
 		$params = [
 			'token' => $token,
@@ -85,6 +85,7 @@ class Account extends Model {
 		return $this->db->column('SELECT id FROM accounts WHERE token = :token', $params);
 	}
 
+	// обновляем токен, чтобы аккаунт стал подтвержденным
 	public function activate($token) {
 		$params = [
 			'token' => $token,
@@ -92,6 +93,7 @@ class Account extends Model {
 		$this->db->query('UPDATE accounts SET status = 1, token = "" WHERE token = :token', $params);
 	}
 
+	// возвращает id пользователя по его логину для реферала
 	public function checkRefExists($login) {
 		$params = [
 			'login' => $login,
@@ -99,6 +101,7 @@ class Account extends Model {
 		return $this->db->column('SELECT id FROM accounts WHERE login = :login', $params);
 	}
 
+	// рандомно создаем токен для аккаунта
 	public function createToken() {
 		return substr(str_shuffle(str_repeat('0123456789abcdefghijklmnopqrstuvwxyz', 30)), 0, 30);
 	}
@@ -107,9 +110,11 @@ class Account extends Model {
 
 		$token = $this->createToken();
 
+		// если есть реферал, то проверяем на его существование
 		if ($post['ref'] == 'none') {
 			$ref = 0;
 		} else {
+		    // id реферала
 			$ref = $this->checkRefExists($post['ref']);
 			if (!$ref) {
 				$ref = 0;
@@ -117,7 +122,7 @@ class Account extends Model {
 		}
 
 		$params = [
-			'id' => '',
+			'id' => NULL,
 			'email' => $post['email'],
 			'login' => $post['login'],
 			'wallet' => $post['wallet'],
@@ -127,6 +132,7 @@ class Account extends Model {
 			'token' => $token,
 			'status' => 0,
 		];
+
 		$this->db->query('INSERT INTO accounts VALUES (:id, :email, :login, :wallet, :password, :ref, :refBalance, :token, :status)', $params);
 		mail($post['email'], 'Register', 'Confirm: '.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/account/confirm/'.$token);
 
