@@ -62,6 +62,11 @@ class Account extends Model {
 		return $this->db->column('SELECT id FROM accounts WHERE email = :email', $params);
 	}
 
+
+
+
+
+
 	public function checkLoginExists($login) {
 		$params = [
 			'login' => $login,
