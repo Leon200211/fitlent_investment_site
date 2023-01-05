@@ -66,7 +66,7 @@ class Dashboard extends Model {
 		return $this->db->row('SELECT * FROM tariffs WHERE uid = :uid ORDER BY id DESC LIMIT :start, :max', $params);
 	}
 
-
+    // заявка на вывод средств
 	public function creatRefWithdraw() {
 		$amount = $_SESSION['account']['refBalance'];
 		$_SESSION['account']['refBalance'] = 0;

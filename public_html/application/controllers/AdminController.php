@@ -5,6 +5,8 @@ namespace application\controllers;
 use application\core\Controller;
 use application\lib\Pagination;
 
+
+// контроллер для админ панели
 class AdminController extends Controller {
 
 	public function __construct($route) {
@@ -12,6 +14,7 @@ class AdminController extends Controller {
 		$this->view->layout = 'admin';
 	}
 
+	// вход в админку
 	public function loginAction() {
 		if (isset($_SESSION['admin'])) {
 			$this->view->redirect('admin/withdraw');
@@ -26,6 +29,7 @@ class AdminController extends Controller {
 		$this->view->render('Вход');
 	}
 
+	// работа с запросами на вывод средств
 	public function withdrawAction() {
 		if (!empty($_POST)) {
 			if ($_POST['type'] == 'ref') {
@@ -54,6 +58,7 @@ class AdminController extends Controller {
 		$this->view->render('Заказы на вывод средств', $vars);
 	}
 
+	// работа с историей
 	public function historyAction() {
 		$pagination = new Pagination($this->route, $this->model->historyCount());
 		$vars = [
@@ -63,6 +68,7 @@ class AdminController extends Controller {
 		$this->view->render('История', $vars);
 	}
 
+	// список текущих инвестиций в тарифы
 	public function tariffsAction() {
 		$pagination = new Pagination($this->route, $this->model->tariffsCount());
 		$vars = [
@@ -72,6 +78,7 @@ class AdminController extends Controller {
 		$this->view->render('Список инвестиций', $vars);
 	}
 
+	// выход из админки
 	public function logoutAction() {
 		unset($_SESSION['admin']);
 		$this->view->redirect('admin/login');
