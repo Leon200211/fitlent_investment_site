@@ -4,7 +4,11 @@ namespace application\models;
 
 use application\core\Model;
 
+
+
+// Модель для работы с инвестициями
 class Dashboard extends Model {
+
 
 	public function historyCount() {
 		$params = [
@@ -13,6 +17,7 @@ class Dashboard extends Model {
 		return $this->db->column('SELECT COUNT(id) FROM history WHERE uid = :uid', $params);
 	}
 
+	// вывод истории действий пользователя
 	public function historyList($route) {
 		$max = 10;
 		$params = [
@@ -23,6 +28,7 @@ class Dashboard extends Model {
 		return $this->db->row('SELECT * FROM history WHERE uid = :uid ORDER BY id DESC LIMIT :start, :max', $params);
 	}
 
+	// количество рефералов у пользователя
 	public function referralsCount() {
 		$params = [
 			'uid' => $_SESSION['account']['id'],
@@ -30,6 +36,7 @@ class Dashboard extends Model {
 		return $this->db->column('SELECT COUNT(id) FROM accounts WHERE ref = :uid', $params);
 	}
 
+	// список рефералов пользователя
 	public function referralsList($route) {
 		$max = 10;
 		$params = [
@@ -40,6 +47,7 @@ class Dashboard extends Model {
 		return $this->db->row('SELECT login, email FROM accounts WHERE ref = :uid ORDER BY id DESC LIMIT :start, :max', $params);
 	}
 
+
 	public function tariffsCount() {
 		$params = [
 			'uid' => $_SESSION['account']['id'],
@@ -47,6 +55,7 @@ class Dashboard extends Model {
 		return $this->db->column('SELECT COUNT(id) FROM tariffs WHERE uid = :uid', $params);
 	}
 
+	// история инвестиций
 	public function tariffsList($route) {
 		$max = 10;
 		$params = [
@@ -56,6 +65,7 @@ class Dashboard extends Model {
 		];
 		return $this->db->row('SELECT * FROM tariffs WHERE uid = :uid ORDER BY id DESC LIMIT :start, :max', $params);
 	}
+
 
 	public function creatRefWithdraw() {
 		$amount = $_SESSION['account']['refBalance'];
